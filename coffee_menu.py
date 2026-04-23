@@ -1,4 +1,5 @@
 import os
+import json
 
 # Khởi tạo danh sách menu rỗng
 menu_quan = []
@@ -168,43 +169,29 @@ def thong_ke_menu(menu):
         print(f"   - {dm:<15}: {so_luong} món")
     print("="*40)
 
-def luu_du_lieu(menu, ten_file="menu_data.txt"):
-    """
-    Lưu dữ liệu trạng thái hiện tại xuống file TXT.
-    """
+def luu_du_lieu(menu, ten_file="menu_data.json"):
+    """Lưu dữ liệu cấu trúc JSON (1.0 Điểm Nâng cao)"""
     try:
         with open(ten_file, 'w', encoding='utf-8') as file:
-            for mon in menu:
-                dong = f"{mon['ma_mon']},{mon['ten_mon']},{mon['danh_muc']},{mon['gia_tien']}\n"
-                file.write(dong)
+            # indent=4 giúp file JSON tự động format đẹp mắt
+            json.dump(menu, file, ensure_ascii=False, indent=4)
         print(f"💾 Đã lưu dữ liệu thành công vào file '{ten_file}'!")
     except Exception as e:
         print(f"⚠ Lỗi khi lưu file: {e}")
 
-def tai_du_lieu(menu, ten_file="menu_data.txt"):
-    """
-    Đọc dữ liệu từ file TXT khi khởi động chương trình.
-    """
+def tai_du_lieu(menu, ten_file="menu_data.json"):
+    """Đọc dữ liệu từ file JSON"""
     if not os.path.exists(ten_file):
         print(f"ℹ Không tìm thấy file '{ten_file}'. Sẽ khởi tạo menu mới.")
         return
 
     try:
         with open(ten_file, 'r', encoding='utf-8') as file:
-            cac_dong = file.readlines()
-            for dong in cac_dong:
-                du_lieu = dong.strip().split(',')
-                if len(du_lieu) == 4:
-                    mon_moi = {
-                        'ma_mon': du_lieu[0],
-                        'ten_mon': du_lieu[1],
-                        'danh_muc': du_lieu[2],
-                        'gia_tien': float(du_lieu[3])
-                    }
-                    menu.append(mon_moi)
+            du_lieu_json = json.load(file)
+            menu.extend(du_lieu_json) # Đổ toàn bộ dữ liệu vào list
         print(f"📂 Đã tải thành công {len(menu)} món từ file '{ten_file}'.")
     except Exception as e:
-        print(f"⚠ Lỗi khi đọc file: {e}")
+        print(f"⚠ Lỗi khi đọc file: Có thể file rỗng hoặc sai định dạng.")
 
 def main():
     """Hàm điều phối trung tâm (Main Control Flow)"""
