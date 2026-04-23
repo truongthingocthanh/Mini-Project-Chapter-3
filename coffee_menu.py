@@ -26,7 +26,8 @@ def hien_thi_menu_chinh():
     print("3. Tìm kiếm món (Theo Mã hoặc Tên)")
     print("4. Sắp xếp Menu (Theo giá hoặc Tên)")
     print("5. Thống kê cơ bản (Tổng số món, Giá TB)")
-    print("6. Lưu dữ liệu & Thoát")
+    print("6. Lưu dữ liệu (JSON) & Thoát")
+    print("7. Xuất báo cáo ra file .txt") 
     print("="*40 + f"{Mau.RESET}") # Reset màu ở cuối
 
 def nhap_mon_moi(menu):
@@ -56,7 +57,7 @@ def nhap_mon_moi(menu):
             print(f"{Mau.CANH_BAO}⚠ Tên món không được để trống!{Mau.RESET}")
             continue
             
-        # Thuật toán chặn trùng Tên món nằm ở đây:
+        # Thuật toán chặn trùng Tên món:
         da_ton_tai_ten = any(mon['ten_mon'].lower() == ten_mon.lower() for mon in menu)
         if da_ton_tai_ten:
             print(f"{Mau.CANH_BAO}⚠ Món '{ten_mon}' đã có trong menu. Vui lòng nhập tên khác (VD: Bạc Xỉu Đá)!{Mau.RESET}")
@@ -240,6 +241,33 @@ def tai_du_lieu(menu, ten_file="menu_data.json"):
     except Exception as e:
         print(f"{Mau.LOI}⚠ Lỗi khi đọc file: Có thể file rỗng hoặc sai định dạng.{Mau.RESET}")
 
+def xuat_bao_cao_txt(menu, ten_file="bao_cao_menu.txt"):
+    """
+    Module Report/File I/O 
+    Xuất trạng thái hiện tại của dữ liệu ra tệp .txt.
+    """
+    if not menu:
+        print(f"{Mau.CANH_BAO}⚠ Menu trống, không có gì để xuất báo cáo!{Mau.RESET}")
+        return
+
+    try:
+        with open(ten_file, 'w', encoding='utf-8') as f:
+            f.write("BÁO CÁO DANH SÁCH MENU QUÁN CÀ PHÊ\n")
+            f.write("="*40 + "\n")
+            f.write(f"{'Mã':<6} | {'Tên món':<20} | {'Giá tiền':>10}\n")
+            f.write("-" * 40 + "\n")
+            
+            for mon in menu:
+                gia_vn = f"{mon['gia_tien']:,.0f}".replace(',', '.')
+                f.write(f"{mon['ma_mon']:<6} | {mon['ten_mon']:<20} | {gia_vn:>10} VNĐ\n")
+            
+            f.write("="*40 + "\n")
+            f.write(f"Tổng cộng: {len(menu)} món.\n")
+            
+        print(f"{Mau.THANH_CONG}✅ Đã xuất báo cáo ra file '{ten_file}' thành công!{Mau.RESET}")
+    except Exception as e:
+        print(f"{Mau.LOI}⚠ Lỗi khi xuất file TXT: {e}{Mau.RESET}")
+
 def main():
     """Hàm điều phối trung tâm (Main Control Flow)"""
     tai_du_lieu(menu_quan) 
@@ -262,6 +290,8 @@ def main():
             luu_du_lieu(menu_quan)
             print(f"{Mau.THANH_CONG}👋 Đã lưu dữ liệu. Tạm biệt và hẹn gặp lại!{Mau.RESET}")
             break
+        elif lua_chon == '7':
+            xuat_bao_cao_txt(menu_quan)
         else:
             print(f"{Mau.CANH_BAO}⚠ Lựa chọn không hợp lệ. Vui lòng nhập từ 1 đến 6!{Mau.RESET}")
 
