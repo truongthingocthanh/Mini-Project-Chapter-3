@@ -1,0 +1,14 @@
+[
+    {
+        "ma_mon": "CF02",
+        "ten_mon": "Cà Phê Sữa",
+        "danh_muc": "Cà Phê",
+        "gia_tien": 15000.0
+    },
+    {
+        "ma_mon": "CF03",
+        "ten_mon": "Bạc Xỉu",
+        "danh_muc": "Cà Phê",
+        "gia_tien": 18000.0
+    }
+]

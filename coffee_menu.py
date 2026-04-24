@@ -26,8 +26,10 @@ def hien_thi_menu_chinh():
     print("3. Tìm kiếm món (Theo Mã hoặc Tên)")
     print("4. Sắp xếp Menu (Theo giá hoặc Tên)")
     print("5. Thống kê cơ bản (Tổng số món, Giá TB)")
-    print("6. Lưu dữ liệu (JSON) & Thoát")
-    print("7. Xuất báo cáo ra file .txt") 
+    print("6. Xóa món")
+    print("7. Sửa thông tin món")
+    print("8. Lưu dữ liệu (JSON) & Thoát")
+    print("9. Xuất báo cáo ra file .txt") 
     print("="*40 + f"{Mau.RESET}") # Reset màu ở cuối
 
 def nhap_mon_moi(menu):
@@ -218,8 +220,85 @@ def thong_ke_menu(menu):
         print(f"   - {dm:<15}: {so_luong} món")
     print("="*40)
 
+def xoa_mon(menu):
+    """Module Delete: Xóa món khỏi danh sách"""
+    print(f"\n{Mau.TIEU_DE}{Mau.IN_DAM}" + "-"*15 + " XÓA MÓN " + "-"*15 + f"{Mau.RESET}")
+    if not menu:
+        print(f"{Mau.CANH_BAO}📭 Menu hiện đang trống!{Mau.RESET}")
+        return
+
+    ma_xoa = input("Nhập mã món cần xóa (VD: CF01): ").strip().upper()
+    
+    # Tìm món trong menu
+    for mon in menu:
+        if mon['ma_mon'] == ma_xoa:
+            print(f"👉 Món cần xóa: {Mau.IN_DAM}{mon['ten_mon']}{Mau.RESET} (Giá: {mon['gia_tien']:,.0f} VNĐ)")
+            xac_nhan = input(f"{Mau.CANH_BAO}⚠ Bạn có chắc chắn muốn xóa món này không? (Y/N): {Mau.RESET}").strip().upper()
+            
+            if xac_nhan == 'Y':
+                menu.remove(mon)
+                print(f"{Mau.THANH_CONG}✅ Đã xóa món '{ma_xoa}' thành công!{Mau.RESET}")
+            else:
+                print(f"{Mau.TIEU_DE}ℹ Đã hủy thao tác xóa.{Mau.RESET}")
+            return # Xử lý xong thì thoát hàm luôn
+            
+    # Nếu chạy hết vòng lặp mà không return nghĩa là không tìm thấy
+    print(f"{Mau.LOI}❌ Không tìm thấy mã món '{ma_xoa}' trong menu!{Mau.RESET}")
+
+
+def sua_mon(menu):
+    """Module Update: Cập nhật thông tin món"""
+    print(f"\n{Mau.TIEU_DE}{Mau.IN_DAM}" + "-"*15 + " SỬA THÔNG TIN MÓN " + "-"*15 + f"{Mau.RESET}")
+    if not menu:
+        print(f"{Mau.CANH_BAO}📭 Menu hiện đang trống!{Mau.RESET}")
+        return
+
+    ma_sua = input("Nhập mã món cần sửa: ").strip().upper()
+    
+    for mon in menu:
+        if mon['ma_mon'] == ma_sua:
+            print(f"👉 Đang sửa món: {Mau.IN_DAM}{mon['ten_mon']}{Mau.RESET}")
+            print(f"{Mau.TIEU_DE}(Mẹo: Nhấn Enter nếu muốn giữ nguyên giá trị cũ){Mau.RESET}")
+            
+            # 1. Sửa Tên Món
+            ten_moi = input(f"- Tên món mới ({mon['ten_mon']}): ").strip().title()
+            if ten_moi: # Nếu người dùng có gõ chữ (không bấm Enter trơn)
+                # Kiểm tra xem tên mới có bị trùng với các món KHÁC không
+                da_ton_tai = any(m['ten_mon'].lower() == ten_moi.lower() for m in menu if m['ma_mon'] != ma_sua)
+                if da_ton_tai:
+                    print(f"{Mau.CANH_BAO}⚠ Tên '{ten_moi}' đã tồn tại! Sẽ giữ nguyên tên cũ.{Mau.RESET}")
+                else:
+                    mon['ten_mon'] = ten_moi
+            
+            # 2. Sửa Danh mục
+            dm_moi = input(f"- Danh mục mới ({mon['danh_muc']}): ").strip().title()
+            if dm_moi:
+                mon['danh_muc'] = dm_moi
+                
+            # 3. Sửa Giá tiền
+            while True:
+                gia_str = input(f"- Giá tiền mới ({mon['gia_tien']:,.0f} VNĐ): ").strip()
+                if not gia_str: # Bấm Enter giữ nguyên
+                    break
+                try:
+                    gia_moi = float(gia_str)
+                    if gia_moi <= 0:
+                        print(f"{Mau.CANH_BAO}⚠ Giá tiền phải lớn hơn 0!{Mau.RESET}")
+                    else:
+                        if gia_moi < 1000: # Vẫn hỗ trợ tính năng gõ tắt (VD: 15)
+                            gia_moi = gia_moi * 1000
+                        mon['gia_tien'] = gia_moi
+                        break
+                except ValueError:
+                    print(f"{Mau.LOI}⚠ Lỗi: Vui lòng chỉ nhập số!{Mau.RESET}")
+                    
+            print(f"{Mau.THANH_CONG}✅ Đã cập nhật thông tin món '{ma_sua}' thành công!{Mau.RESET}")
+            return
+            
+    print(f"{Mau.LOI}❌ Không tìm thấy mã món '{ma_sua}' trong menu!{Mau.RESET}")
+
 def luu_du_lieu(menu, ten_file="menu_data.json"):
-    """Lưu dữ liệu cấu trúc JSON (1.0 Điểm Nâng cao)"""
+    """Lưu dữ liệu cấu trúc JSON"""
     try:
         with open(ten_file, 'w', encoding='utf-8') as file:
             json.dump(menu, file, ensure_ascii=False, indent=4)
@@ -274,7 +353,7 @@ def main():
     
     while True:
         hien_thi_menu_chinh()
-        lua_chon = input("Vui lòng chọn chức năng (1-6): ").strip()
+        lua_chon = input("Vui lòng chọn chức năng (1-9): ").strip()
         
         if lua_chon == '1':
             nhap_mon_moi(menu_quan)
@@ -287,13 +366,17 @@ def main():
         elif lua_chon == '5':
             thong_ke_menu(menu_quan)
         elif lua_chon == '6':
+            xoa_mon(menu_quan)
+        elif lua_chon == '7':
+            sua_mon(menu_quan)
+        elif lua_chon == '8':
             luu_du_lieu(menu_quan)
             print(f"{Mau.THANH_CONG}👋 Đã lưu dữ liệu. Tạm biệt và hẹn gặp lại!{Mau.RESET}")
             break
-        elif lua_chon == '7':
+        elif lua_chon == '9':
             xuat_bao_cao_txt(menu_quan)
         else:
-            print(f"{Mau.CANH_BAO}⚠ Lựa chọn không hợp lệ. Vui lòng nhập từ 1 đến 6!{Mau.RESET}")
+            print(f"{Mau.CANH_BAO}⚠ Lựa chọn không hợp lệ. Vui lòng nhập từ 1 đến 9!{Mau.RESET}")
 
 if __name__ == "__main__":
     main()
