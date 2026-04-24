@@ -322,7 +322,7 @@ def tai_du_lieu(menu, ten_file="menu_data.json"):
 
 def xuat_bao_cao_txt(menu, ten_file="bao_cao_menu.txt"):
     """
-    Module Report/File I/O 
+    Module Report/File I/O
     Xuất trạng thái hiện tại của dữ liệu ra tệp .txt.
     """
     if not menu:
@@ -332,15 +332,18 @@ def xuat_bao_cao_txt(menu, ten_file="bao_cao_menu.txt"):
     try:
         with open(ten_file, 'w', encoding='utf-8') as f:
             f.write("BÁO CÁO DANH SÁCH MENU QUÁN CÀ PHÊ\n")
-            f.write("="*40 + "\n")
-            f.write(f"{'Mã':<6} | {'Tên món':<20} | {'Giá tiền':>10}\n")
-            f.write("-" * 40 + "\n")
+            f.write("="*50 + "\n") 
+            
+            f.write(f"{'Mã':<6} | {'Tên món':<20} | {'Giá tiền':>14}\n")
+            f.write("-" * 50 + "\n")
             
             for mon in menu:
                 gia_vn = f"{mon['gia_tien']:,.0f}".replace(',', '.')
-                f.write(f"{mon['ma_mon']:<6} | {mon['ten_mon']:<20} | {gia_vn:>10} VNĐ\n")
+                chuoi_gia = f"{gia_vn} VNĐ" 
+                
+                f.write(f"{mon['ma_mon']:<6} | {mon['ten_mon']:<20} | {chuoi_gia:>14}\n")
             
-            f.write("="*40 + "\n")
+            f.write("="*50 + "\n")
             f.write(f"Tổng cộng: {len(menu)} món.\n")
             
         print(f"{Mau.THANH_CONG}✅ Đã xuất báo cáo ra file '{ten_file}' thành công!{Mau.RESET}")
