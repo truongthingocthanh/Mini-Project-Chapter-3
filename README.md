@@ -48,3 +48,17 @@ Dự án vận hành theo mô hình vòng đời khép kín:
 2. **Vòng lặp tương tác (Interactive Loop):** Vòng lặp vô hạn `while True` liên tục vẽ lại menu và chờ người dùng nhập lệnh điều khiển.
 3. **Điều hướng (Branching):** Dựa vào lựa chọn (1-9) của người dùng, khối `if/elif` sẽ gọi đến đúng hàm chuyên biệt để xử lý. Biến `menu_quan` được truyền liên tục giữa các hàm như một tham số.
 4. **Kết thúc (Termination):** Khi người dùng chọn chức năng số `8`, hàm `luu_du_lieu()` được kích hoạt để "chụp" lại trạng thái cuối cùng của bộ nhớ, lưu đè xuống ổ cứng (JSON) trước khi gọi lệnh `break` để thoát hoàn toàn vòng lặp, kết thúc chương trình.
+
+## Bảng tự đánh giá
+STT,Tiêu chí chấm điểm (Theo đề bài),Minh chứng hoàn thành xuất sắc trong Code của bạn,Điểm tự chấm
+1,"Hệ thống Menu CLI(Menu tương tác vòng lặp vô hạn, không văng lỗi khi nhập sai) ","Sử dụng vòng lặp while True ở hàm main(). Nếu người dùng nhập chữ hoặc số ngoài khoảng 1-9, hệ thống sẽ rơi vào nhánh else cảnh báo lỗi bằng màu ANSI vàng thay vì bị crash (văng lỗi).",1.0 / 1.0
+2,"Nhập & Xác thực dữ liệu(Thêm bản ghi, xác thực kiểu dữ liệu chặn nhập chữ vào số) ","Hàm nhap_mon_moi() có tới 4 vòng lặp xác thực: chặn để trống, chặn trùng lặp mã/tên món. Đặc biệt, dùng try...except ValueError để chặn nhập chữ vào giá tiền một cách triệt để.",1.0 / 1.0
+3,"Hiển thị dữ liệu(Căn lề chuẩn xác, cấu trúc bảng) ","Hàm hien_thi_danh_sach() định dạng bảng cực kỳ ngay ngắn bằng cú pháp căn lề f-string (:<8, :<25). Giá tiền được tự động chuyển đổi từ dấu phẩy sang dấu chấm chuẩn Việt Nam (15.000 VNĐ).",1.0 / 1.0
+4,Tìm kiếm cơ bản(Tìm theo ID hoặc Tên) ,Hàm tim_kiem_mon() linh hoạt cho phép người dùng gõ cả mã món lẫn tên món để tra cứu.,1.0 / 1.0
+5,Cơ chế Sắp xếp(Sắp xếp theo số học hoặc chữ cái) ,Hàm sap_xep_menu() cung cấp 2 tùy chọn: Sắp xếp theo Tên (chữ cái A-Z) và theo Giá tiền (số học). Áp dụng hàm ẩn danh lambda để tối ưu hóa thuật toán sắp xếp.,1.0 / 1.0
+6,"Tính toán cơ bản(Tính tổng, trung bình, đếm) ","Hàm thong_ke_menu() đếm tổng số lượng món (len), tính tổng giá trị (sum) và tính ra mức giá trung bình của toàn bộ menu.",1.0 / 1.0
+7,Xử lý tệp TXT(Lưu và tải dữ liệu .txt không mất) ,Hàm xuat_bao_cao_txt() hỗ trợ xuất trạng thái menu hiện tại ra file văn bản bao_cao_menu.txt dưới dạng bảng biểu chuyên nghiệp phục vụ in ấn báo cáo.,1.0 / 1.0
+8,"[Nâng cao] Logic phức tạp(Tìm chuỗi con, lọc điều kiện, HOẶC thống kê nhóm) ","Vượt yêu cầu đề bài (Làm 2/3):- Tìm kiếm chuỗi con: Không phân biệt hoa thường với .lower() và toán tử in.- Thống kê nhóm: Dùng Dictionary để đếm số lượng món theo từng Nhóm danh mục (Cà phê, Trà...).",1.0 / 1.0
+9,[Nâng cao] JSON/DBMS(Xuất nhập dữ liệu JSON hoặc SQLite) ,"Xây dựng 2 hàm luu_du_lieu và tai_du_lieu tích hợp thư viện json. Dữ liệu cấu trúc được lưu trữ bền vững vào menu_data.json, đảm bảo an toàn tắt/mở app.",1.0 / 1.0
+10,"Git & Mã nguồn mô-đun(GitHub >=3 commits, chia hàm, không Spaghetti code) ","Dự án có README đầy đủ, GitHub có tới 13 commits. Mã nguồn áp dụng triệt để thiết kế Top-Down, chia thành 10 module hàm đơn nhiệm. Đặc biệt, truyền biến qua tham số để triệt tiêu hoàn toàn lỗi ""Side effects"".",1.0 / 1.0
+,TỔNG CỘNG ĐIỂM TỰ ĐÁNH GIÁ:,"Sản phẩm hoàn thiện, logic chặt chẽ, tối ưu UX/UI.",10.0 / 10.0
