@@ -50,15 +50,15 @@ Dự án vận hành theo mô hình vòng đời khép kín:
 4. **Kết thúc (Termination):** Khi người dùng chọn chức năng số `8`, hàm `luu_du_lieu()` được kích hoạt để "chụp" lại trạng thái cuối cùng của bộ nhớ, lưu đè xuống ổ cứng (JSON) trước khi gọi lệnh `break` để thoát hoàn toàn vòng lặp, kết thúc chương trình.
 
 ## Bảng tự đánh giá
-STT,Tiêu chí chấm điểm (Theo đề bài),Minh chứng hoàn thành xuất sắc trong Code của bạn,Điểm tự chấm
-1,"Hệ thống Menu CLI(Menu tương tác vòng lặp vô hạn, không văng lỗi khi nhập sai) ","Sử dụng vòng lặp while True ở hàm main(). Nếu người dùng nhập chữ hoặc số ngoài khoảng 1-9, hệ thống sẽ rơi vào nhánh else cảnh báo lỗi bằng màu ANSI vàng thay vì bị crash (văng lỗi).",1.0 / 1.0
-2,"Nhập & Xác thực dữ liệu(Thêm bản ghi, xác thực kiểu dữ liệu chặn nhập chữ vào số) ","Hàm nhap_mon_moi() có tới 4 vòng lặp xác thực: chặn để trống, chặn trùng lặp mã/tên món. Đặc biệt, dùng try...except ValueError để chặn nhập chữ vào giá tiền một cách triệt để.",1.0 / 1.0
-3,"Hiển thị dữ liệu(Căn lề chuẩn xác, cấu trúc bảng) ","Hàm hien_thi_danh_sach() định dạng bảng cực kỳ ngay ngắn bằng cú pháp căn lề f-string (:<8, :<25). Giá tiền được tự động chuyển đổi từ dấu phẩy sang dấu chấm chuẩn Việt Nam (15.000 VNĐ).",1.0 / 1.0
-4,Tìm kiếm cơ bản(Tìm theo ID hoặc Tên) ,Hàm tim_kiem_mon() linh hoạt cho phép người dùng gõ cả mã món lẫn tên món để tra cứu.,1.0 / 1.0
-5,Cơ chế Sắp xếp(Sắp xếp theo số học hoặc chữ cái) ,Hàm sap_xep_menu() cung cấp 2 tùy chọn: Sắp xếp theo Tên (chữ cái A-Z) và theo Giá tiền (số học). Áp dụng hàm ẩn danh lambda để tối ưu hóa thuật toán sắp xếp.,1.0 / 1.0
-6,"Tính toán cơ bản(Tính tổng, trung bình, đếm) ","Hàm thong_ke_menu() đếm tổng số lượng món (len), tính tổng giá trị (sum) và tính ra mức giá trung bình của toàn bộ menu.",1.0 / 1.0
-7,Xử lý tệp TXT(Lưu và tải dữ liệu .txt không mất) ,Hàm xuat_bao_cao_txt() hỗ trợ xuất trạng thái menu hiện tại ra file văn bản bao_cao_menu.txt dưới dạng bảng biểu chuyên nghiệp phục vụ in ấn báo cáo.,1.0 / 1.0
-8,"[Nâng cao] Logic phức tạp(Tìm chuỗi con, lọc điều kiện, HOẶC thống kê nhóm) ","Vượt yêu cầu đề bài (Làm 2/3):- Tìm kiếm chuỗi con: Không phân biệt hoa thường với .lower() và toán tử in.- Thống kê nhóm: Dùng Dictionary để đếm số lượng món theo từng Nhóm danh mục (Cà phê, Trà...).",1.0 / 1.0
-9,[Nâng cao] JSON/DBMS(Xuất nhập dữ liệu JSON hoặc SQLite) ,"Xây dựng 2 hàm luu_du_lieu và tai_du_lieu tích hợp thư viện json. Dữ liệu cấu trúc được lưu trữ bền vững vào menu_data.json, đảm bảo an toàn tắt/mở app.",1.0 / 1.0
-10,"Git & Mã nguồn mô-đun(GitHub >=3 commits, chia hàm, không Spaghetti code) ","Dự án có README đầy đủ, GitHub có tới 13 commits. Mã nguồn áp dụng triệt để thiết kế Top-Down, chia thành 10 module hàm đơn nhiệm. Đặc biệt, truyền biến qua tham số để triệt tiêu hoàn toàn lỗi ""Side effects"".",1.0 / 1.0
-,TỔNG CỘNG ĐIỂM TỰ ĐÁNH GIÁ:,"Sản phẩm hoàn thiện, logic chặt chẽ, tối ưu UX/UI.",10.0 / 10.0
+STT,Tiêu chí chi tiết (Detailed Criteria),Minh chứng trong mã nguồn (Implementation Details),Điểm tự chấm
+1,Hệ thống Menu CLI,Sử dụng vòng lặp vô hạn while True trong hàm main(). Xử lý các lựa chọn không hợp lệ (nhánh else) mà không gây dừng chương trình.,1.0 / 1.0
+2,Nhập & Xác thực dữ liệu,"Hàm nhap_mon_moi() thực hiện kiểm tra mã/tên trống, trùng lặp và sử dụng try-except để chặn nhập chữ vào trường giá tiền.",1.0 / 1.0
+3,Hiển thị dữ liệu,"Hàm hien_thi_danh_sach() in dữ liệu dưới dạng bảng, căn lề chuẩn xác bằng f-string và định dạng giá tiền VNĐ chuyên nghiệp.",1.0 / 1.0
+4,Tìm kiếm cơ bản,Hàm tim_kiem_mon() cho phép tìm chính xác món ăn dựa trên Mã món hoặc Tên món.,1.0 / 1.0
+5,Cơ chế Sắp xếp,Hàm sap_xep_menu() sử dụng lambda để sắp xếp danh sách theo Tên (A-Z) hoặc Giá tiền (Thấp đến Cao).,1.0 / 1.0
+6,Tính toán cơ bản,"Hàm thong_ke_menu() tính toán chính xác tổng số lượng món, tổng giá trị menu và giá trung bình.",1.0 / 1.0
+7,Xử lý tệp TXT,Hàm xuat_bao_cao_txt() lưu trạng thái dữ liệu hiện tại vào file báo cáo .txt với định dạng bảng đẹp mắt.,1.0 / 1.0
+8,Logic phức tạp (Nâng cao),"Triển khai tìm kiếm theo chuỗi con (substring search) và thống kê phân loại số lượng món theo từng Danh mục (Cà phê, Trà, Đá xay...).",1.0 / 1.0
+9,Lưu trữ JSON (Nâng cao),Sử dụng thư viện json để lưu (luu_du_lieu) và nạp (tai_du_lieu) dữ liệu dưới dạng cấu trúc .json chuyên nghiệp.,1.0 / 1.0
+10,Git & Modular Code,Mã nguồn chia thành các hàm đơn nhiệm (Top-Down Design). Repository GitHub có 13 commits và file README hướng dẫn chi tiết.,1.0 / 1.0
+,TỔNG CỘNG,Dự án hoàn thiện đầy đủ mọi yêu cầu từ cơ bản đến nâng cao.,10.0 / 10.0
