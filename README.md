@@ -49,16 +49,18 @@ Dự án vận hành theo mô hình vòng đời khép kín:
 3. **Điều hướng (Branching):** Dựa vào lựa chọn (1-9) của người dùng, khối `if/elif` sẽ gọi đến đúng hàm chuyên biệt để xử lý. Biến `menu_quan` được truyền liên tục giữa các hàm như một tham số.
 4. **Kết thúc (Termination):** Khi người dùng chọn chức năng số `8`, hàm `luu_du_lieu()` được kích hoạt để "chụp" lại trạng thái cuối cùng của bộ nhớ, lưu đè xuống ổ cứng (JSON) trước khi gọi lệnh `break` để thoát hoàn toàn vòng lặp, kết thúc chương trình.
 
-## Bảng tự đánh giá
-STT,Tiêu chí chi tiết (Detailed Criteria),Minh chứng trong mã nguồn (Implementation Details),Điểm tự chấm
-1,Hệ thống Menu CLI,Sử dụng vòng lặp vô hạn while True trong hàm main(). Xử lý các lựa chọn không hợp lệ (nhánh else) mà không gây dừng chương trình.,1.0 / 1.0
-2,Nhập & Xác thực dữ liệu,"Hàm nhap_mon_moi() thực hiện kiểm tra mã/tên trống, trùng lặp và sử dụng try-except để chặn nhập chữ vào trường giá tiền.",1.0 / 1.0
-3,Hiển thị dữ liệu,"Hàm hien_thi_danh_sach() in dữ liệu dưới dạng bảng, căn lề chuẩn xác bằng f-string và định dạng giá tiền VNĐ chuyên nghiệp.",1.0 / 1.0
-4,Tìm kiếm cơ bản,Hàm tim_kiem_mon() cho phép tìm chính xác món ăn dựa trên Mã món hoặc Tên món.,1.0 / 1.0
-5,Cơ chế Sắp xếp,Hàm sap_xep_menu() sử dụng lambda để sắp xếp danh sách theo Tên (A-Z) hoặc Giá tiền (Thấp đến Cao).,1.0 / 1.0
-6,Tính toán cơ bản,"Hàm thong_ke_menu() tính toán chính xác tổng số lượng món, tổng giá trị menu và giá trung bình.",1.0 / 1.0
-7,Xử lý tệp TXT,Hàm xuat_bao_cao_txt() lưu trạng thái dữ liệu hiện tại vào file báo cáo .txt với định dạng bảng đẹp mắt.,1.0 / 1.0
-8,Logic phức tạp (Nâng cao),"Triển khai tìm kiếm theo chuỗi con (substring search) và thống kê phân loại số lượng món theo từng Danh mục (Cà phê, Trà, Đá xay...).",1.0 / 1.0
-9,Lưu trữ JSON (Nâng cao),Sử dụng thư viện json để lưu (luu_du_lieu) và nạp (tai_du_lieu) dữ liệu dưới dạng cấu trúc .json chuyên nghiệp.,1.0 / 1.0
-10,Git & Modular Code,Mã nguồn chia thành các hàm đơn nhiệm (Top-Down Design). Repository GitHub có 13 commits và file README hướng dẫn chi tiết.,1.0 / 1.0
-,TỔNG CỘNG,Dự án hoàn thiện đầy đủ mọi yêu cầu từ cơ bản đến nâng cao.,10.0 / 10.0
+## 🏆 BẢNG TỰ CHẤM ĐIỂM DỰ ÁN (TOPIC 10)
+
+| STT | Tiêu chí chi tiết (Detailed Criteria) | Minh chứng trong mã nguồn (Implementation Details) | Điểm tự chấm |
+| :---: | :--- | :--- | :---: |
+| **1** | **Hệ thống Menu CLI** | Sử dụng vòng lặp vô hạn `while True` trong hàm `main()`. Xử lý các lựa chọn không hợp lệ (nhánh `else`) mà không gây dừng chương trình. | **1.0** / 1.0 |
+| **2** | **Nhập & Xác thực dữ liệu** | Hàm `nhap_mon_moi()` thực hiện kiểm tra mã/tên trống, trùng lặp và sử dụng `try-except` để chặn nhập chữ vào trường giá tiền. | **1.0** / 1.0 |
+| **3** | **Hiển thị dữ liệu** | Hàm `hien_thi_danh_sach()` in dữ liệu dưới dạng bảng, căn lề chuẩn xác bằng `f-string` và định dạng giá tiền `VNĐ` chuyên nghiệp. | **1.0** / 1.0 |
+| **4** | **Tìm kiếm cơ bản** | Hàm `tim_kiem_mon()` cho phép tìm chính xác món ăn dựa trên Mã món hoặc Tên món. | **1.0** / 1.0 |
+| **5** | **Cơ chế Sắp xếp** | Hàm `sap_xep_menu()` sử dụng `lambda` để sắp xếp danh sách theo Tên (A-Z) hoặc Giá tiền (Thấp đến Cao). | **1.0** / 1.0 |
+| **6** | **Tính toán cơ bản** | Hàm `thong_ke_menu()` tính toán chính xác tổng số lượng món, tổng giá trị menu và giá trung bình. | **1.0** / 1.0 |
+| **7** | **Xử lý tệp TXT** | Hàm `xuat_bao_cao_txt()` lưu trạng thái dữ liệu hiện tại vào file báo cáo `.txt` với định dạng bảng đẹp mắt. | **1.0** / 1.0 |
+| **8** | **Logic phức tạp (Nâng cao)** | Triển khai tìm kiếm theo chuỗi con (substring search) và thống kê phân loại số lượng món theo từng Danh mục (Cà phê, Trà, Đá xay...). | **1.0** / 1.0 |
+| **9** | **Lưu trữ JSON (Nâng cao)** | Sử dụng thư viện `json` để lưu (`luu_du_lieu`) và nạp (`tai_du_lieu`) dữ liệu dưới dạng cấu trúc `.json` chuyên nghiệp. | **1.0** / 1.0 |
+| **10** | **Git & Modular Code** | Mã nguồn chia thành các hàm đơn nhiệm (Top-Down Design). Repository GitHub có 13 commits và file README hướng dẫn chi tiết. | **1.0** / 1.0 |
+| | **TỔNG CỘNG** | **Dự án hoàn thiện đầy đủ mọi yêu cầu từ cơ bản đến nâng cao.** | **10.0 / 10.0** |
