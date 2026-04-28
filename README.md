@@ -62,5 +62,5 @@ Dự án vận hành theo mô hình vòng đời khép kín:
 | **7** | **Xử lý tệp TXT** | Hàm `xuat_bao_cao_txt()` lưu trạng thái dữ liệu hiện tại vào file báo cáo `.txt` với định dạng bảng đẹp mắt. | **1.0** / 1.0 |
 | **8** | **Logic phức tạp (Nâng cao)** | Triển khai tìm kiếm theo chuỗi con (substring search) và thống kê phân loại số lượng món theo từng Danh mục (Cà phê, Trà, Đá xay...). | **1.0** / 1.0 |
 | **9** | **Lưu trữ JSON (Nâng cao)** | Sử dụng thư viện `json` để lưu (`luu_du_lieu`) và nạp (`tai_du_lieu`) dữ liệu dưới dạng cấu trúc `.json` chuyên nghiệp. | **1.0** / 1.0 |
-| **10** | **Git & Modular Code** | Mã nguồn chia thành các hàm đơn nhiệm (Top-Down Design). Repository GitHub có 13 commits và file README hướng dẫn chi tiết. | **1.0** / 1.0 |
+| **10** | **Git & Modular Code** | Mã nguồn chia thành các hàm đơn nhiệm (Top-Down Design). Repository GitHub có đủ commits yêu cầu và file README hướng dẫn chi tiết. | **1.0** / 1.0 |
 | | **TỔNG CỘNG** | **Dự án hoàn thiện đầy đủ mọi yêu cầu từ cơ bản đến nâng cao.** | **10.0 / 10.0** |
